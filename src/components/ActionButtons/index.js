@@ -3,7 +3,7 @@
 // @ts-nocheck
 import React, { useState } from 'react'
 import { Button, Modal, Icon } from 'semantic-ui-react'
-import { useForm } from 'react-hook-form'
+import { useForm, Controller } from 'react-hook-form'
 import DatePicker from 'react-datepicker'
 
 import 'react-datepicker/dist/react-datepicker.css'
@@ -37,6 +37,7 @@ function ActionButtons() {
     register,
     formState: { errors },
     handleSubmit,
+    control,
   } = useForm()
 
   const onSubmit = (data) => console.log(data)
@@ -96,14 +97,22 @@ function ActionButtons() {
                     </LabelWrapper>
                     <InputWrapper>
                       <InputDateWrapper>
-                        <DatePicker
-                          selected={startDate}
-                          onChange={(date) => setStartDate(date)}
+                        <Controller
+                          control={control}
+                          name='startDate'
+                          rules={{ required: true }}
+                          render={({ field }) => (
+                            <DatePicker
+                              placeholderText='Select date'
+                              onChange={(date) => field.onChange(date)}
+                              selected={field.value}
+                            />
+                          )}
                         />
                         <Icon name='calendar alternate outline' />
                       </InputDateWrapper>
-                      {errors.firstName?.type === 'required' && (
-                        <ErrorMessage>First name is required</ErrorMessage>
+                      {errors.startDate?.type === 'required' && (
+                        <ErrorMessage>Start Date is required</ErrorMessage>
                       )}
                     </InputWrapper>
                   </Field>
@@ -113,20 +122,19 @@ function ActionButtons() {
                       <Label>Role</Label>
                     </LabelWrapper>
                     <InputWrapper>
-                      {errors.firstName?.type === 'required' &&
-                        'First name is required'}
                       <RadioItemsWrapper>
                         <RadioWrapper>
                           <input
-                            {...register('teste')}
+                            {...register('role')}
                             type='radio'
                             value='(none selected)'
+                            checked
                           />
                           <RadioLabel>(none selected)</RadioLabel>
                         </RadioWrapper>
                         <RadioWrapper>
                           <input
-                            {...register('teste')}
+                            {...register('role')}
                             type='radio'
                             value='asd'
                           />
@@ -134,7 +142,7 @@ function ActionButtons() {
                         </RadioWrapper>
                         <RadioWrapper>
                           <input
-                            {...register('teste')}
+                            {...register('role')}
                             type='radio'
                             value='asd'
                           />
@@ -142,7 +150,7 @@ function ActionButtons() {
                         </RadioWrapper>
                         <RadioWrapper>
                           <input
-                            {...register('teste')}
+                            {...register('role')}
                             type='radio'
                             value='asd'
                           />
@@ -150,7 +158,7 @@ function ActionButtons() {
                         </RadioWrapper>
                         <RadioWrapper>
                           <input
-                            {...register('teste')}
+                            {...register('role')}
                             type='radio'
                             value='asd'
                           />
@@ -165,11 +173,9 @@ function ActionButtons() {
                       <Label>Platoon</Label>
                     </LabelWrapper>
                     <InputWrapper>
-                      {errors.firstName?.type === 'required' &&
-                        'First name is required'}
-                      <select name='func'>
-                        <option value='5'>Function 2</option>
-                        <option value='6'>Function 3</option>
+                      <select name='platoon' {...register('platoon')}>
+                        <option value=''>select</option>
+                        <option value='1'>1</option>
                       </select>
                     </InputWrapper>
                   </Field>

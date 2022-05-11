@@ -34,7 +34,7 @@ function exampleReducer(state, action) {
   }
 }
 
-function EmployeesTable() {
+function ProjectsTable() {
   const [state, dispatch] = React.useReducer(exampleReducer, {
     column: null,
     data: tableData,
@@ -83,4 +83,4 @@ function EmployeesTable() {
   )
 }
 
-export default EmployeesTable
+export default ProjectsTable

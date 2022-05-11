@@ -50,6 +50,14 @@ function ActionButtons() {
 
   const [startDate, setStartDate] = useState(new Date())
 
+  const validateYear = (value) => {
+    const year = value.getFullYear()
+    if (year >= 2050) {
+      return false
+    }
+    return true
+  }
+
   return (
     <Container>
       <div>
@@ -100,7 +108,13 @@ function ActionButtons() {
                         <Controller
                           control={control}
                           name='startDate'
-                          rules={{ required: true }}
+                          rules={
+                            ({
+                              validate: (value) =>
+                                !value || validateYear(value),
+                            },
+                            { required: true })
+                          }
                           render={({ field }) => (
                             <DatePicker
                               placeholderText='Select date'
@@ -111,8 +125,12 @@ function ActionButtons() {
                         />
                         <Icon name='calendar alternate outline' />
                       </InputDateWrapper>
-                      {errors.startDate?.type === 'required' && (
-                        <ErrorMessage>Start Date is required</ErrorMessage>
+                      {errors.startDate && (
+                        <ErrorMessage>
+                          {errors.startDate.type === 'required'
+                            ? 'Start date is required'
+                            : 'Start year should be less than 2050'}
+                        </ErrorMessage>
                       )}
                     </InputWrapper>
                   </Field>

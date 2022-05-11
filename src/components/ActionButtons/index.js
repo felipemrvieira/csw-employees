@@ -13,10 +13,12 @@ import {
   Label,
   LabelWrapper,
   InputWrapper,
+  InputDateWrapper,
   Field,
   RadioItemsWrapper,
   RadioWrapper,
   RadioLabel,
+  ErrorMessage,
 } from './styles'
 
 function exampleReducer(state, action) {
@@ -67,38 +69,42 @@ function ActionButtons() {
         >
           <Modal.Header>Add Employee</Modal.Header>
           <Modal.Content>
-            <div>
-              <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <div>
                 <div className='form_content'>
                   <Field>
                     <LabelWrapper>
-                      <Label>Name</Label>
+                      <Label className='required'>Name</Label>
                     </LabelWrapper>
                     <InputWrapper>
-                      {errors.firstName?.type === 'required' &&
-                        'First name is required'}
-
                       <input
                         {...register('firstName', {
                           required: true,
                           maxLength: 20,
                         })}
                       />
+
+                      {errors.firstName?.type === 'required' && (
+                        <ErrorMessage>First name is required</ErrorMessage>
+                      )}
                     </InputWrapper>
                   </Field>
 
                   <Field>
                     <LabelWrapper>
-                      <Label>Start Date</Label>
+                      <Label className='required'>Start Date</Label>
                     </LabelWrapper>
                     <InputWrapper>
-                      {errors.firstName?.type === 'required' &&
-                        'First name is required'}
-                      <DatePicker
-                        selected={startDate}
-                        onChange={(date) => setStartDate(date)}
-                      />
-                      <Icon name='calendar alternate outline' />
+                      <InputDateWrapper>
+                        <DatePicker
+                          selected={startDate}
+                          onChange={(date) => setStartDate(date)}
+                        />
+                        <Icon name='calendar alternate outline' />
+                      </InputDateWrapper>
+                      {errors.firstName?.type === 'required' && (
+                        <ErrorMessage>First name is required</ErrorMessage>
+                      )}
                     </InputWrapper>
                   </Field>
 
@@ -167,19 +173,12 @@ function ActionButtons() {
                       </select>
                     </InputWrapper>
                   </Field>
-
-                  {/* <input {...register('lastName', { pattern: /^[A-Za-z]+$/i })} />
-                <input
-                  type='number'
-                  {...register('age', { min: 18, max: 99 })}
-                />
-                <input type='submit' /> */}
                 </div>
-              </form>
-            </div>
+              </div>
+            </form>
           </Modal.Content>
           <Modal.Actions>
-            <Button primary onClick={() => dispatch({ type: 'CLOSE_MODAL' })}>
+            <Button primary onClick={handleSubmit(onSubmit)}>
               Add
             </Button>
             <Button onClick={() => dispatch({ type: 'CLOSE_MODAL' })}>

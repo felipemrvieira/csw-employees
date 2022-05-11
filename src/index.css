@@ -19,3 +19,8 @@ code {
 .react-datepicker__input-container {
   width: fit-content !important;
 }
+
+.required:before {
+  content: '*';
+  color: red;
+}

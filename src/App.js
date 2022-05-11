@@ -1,18 +1,25 @@
+// @ts-nocheck
 import React from 'react'
 import './App.css'
 import './semantic.css'
+import { Route, Routes, Link, BrowserRouter } from 'react-router-dom'
+import Employees from './pages/Employees'
+import Projects from './pages/Projects'
 import PageHeader from './components/Header'
 import Nav from './components/Nav'
-import Table from './components/Table'
-import ActionButtons from './components/ActionButtons'
 
 function App() {
   return (
     <div className='App'>
-      <PageHeader />
-      <Nav />
-      <ActionButtons />
-      <Table />
+      <BrowserRouter>
+        <PageHeader />
+        <Nav />
+        <Routes>
+          <Route path='/' element={<Employees />} />
+          <Route path='/employees' element={<Employees />} />
+          <Route path='/projects' element={<Projects />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   )
 }

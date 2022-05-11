@@ -1,18 +1,20 @@
 import React from 'react'
 import { Menu } from 'semantic-ui-react'
 
+import { Link } from 'react-router-dom'
 import { Container } from './styles'
-
-const items = [
-  // { key: 'editorials', active: true, name: 'Editorials' },
-  { key: 'employees', name: 'Employees' },
-  { key: 'projects', name: 'Projects' },
-]
 
 function Nav() {
   return (
     <Container>
-      <Menu items={items} />{' '}
+      <Menu>
+        <Menu.Item as={Link} to='/employees'>
+          Employees
+        </Menu.Item>
+        <Menu.Item as={Link} to='/projects'>
+          Projects
+        </Menu.Item>
+      </Menu>
     </Container>
   )
 }

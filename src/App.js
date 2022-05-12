@@ -3,6 +3,7 @@ import React from 'react'
 import './App.css'
 import './semantic.css'
 import { Route, Routes, Link, BrowserRouter } from 'react-router-dom'
+import { ToastContainer } from 'react-toastify'
 import Employees from './pages/Employees'
 import Projects from './pages/Projects'
 import PageHeader from './components/Header'
@@ -12,6 +13,7 @@ function App() {
   return (
     <div className='App'>
       <BrowserRouter>
+        <ToastContainer />
         <PageHeader />
         <Nav />
         <Routes>

@@ -38,9 +38,13 @@ function ActionButtons() {
     formState: { errors },
     handleSubmit,
     control,
+    reset,
   } = useForm()
 
-  const onSubmit = (data) => console.log(data)
+  const onSubmit = (data) => {
+    console.log(data)
+    reset()
+  }
 
   const [state, dispatch] = React.useReducer(exampleReducer, {
     open: false,
@@ -108,13 +112,9 @@ function ActionButtons() {
                         <Controller
                           control={control}
                           name='startDate'
-                          rules={
-                            ({
-                              validate: (value) =>
-                                !value || validateYear(value),
-                            },
-                            { required: true })
-                          }
+                          rules={{
+                            validate: (value) => !value || validateYear(value),
+                          }}
                           render={({ field }) => (
                             <DatePicker
                               placeholderText='Select date'

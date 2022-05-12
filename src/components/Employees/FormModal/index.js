@@ -23,7 +23,7 @@ import {
 
 import 'react-datepicker/dist/react-datepicker.css'
 
-function FormModal({ formModalOpen, setFormModalOpen }) {
+function FormModal({ formModalOpen, setFormModalOpen, addItem }) {
   const {
     register,
     formState: { errors },
@@ -34,7 +34,9 @@ function FormModal({ formModalOpen, setFormModalOpen }) {
 
   const onSubmit = (data) => {
     console.log(data)
+    addItem(data)
     reset()
+    setFormModalOpen(false)
   }
 
   const [startDate, setStartDate] = useState(new Date())
@@ -66,13 +68,13 @@ function FormModal({ formModalOpen, setFormModalOpen }) {
                   </LabelWrapper>
                   <InputWrapper>
                     <input
-                      {...register('firstName', {
+                      {...register('name', {
                         required: true,
                         maxLength: 20,
                       })}
                     />
 
-                    {errors.firstName?.type === 'required' && (
+                    {errors.name?.type === 'required' && (
                       <ErrorMessage>First name is required</ErrorMessage>
                     )}
                   </InputWrapper>
@@ -126,19 +128,19 @@ function FormModal({ formModalOpen, setFormModalOpen }) {
                         <RadioLabel>(none selected)</RadioLabel>
                       </RadioWrapper>
                       <RadioWrapper>
-                        <input {...register('role')} type='radio' value='asd' />
+                        <input {...register('role')} type='radio' value='JE' />
                         <RadioLabel>JE</RadioLabel>
                       </RadioWrapper>
                       <RadioWrapper>
-                        <input {...register('role')} type='radio' value='asd' />
+                        <input {...register('role')} type='radio' value='PE' />
                         <RadioLabel>PE</RadioLabel>
                       </RadioWrapper>
                       <RadioWrapper>
-                        <input {...register('role')} type='radio' value='asd' />
+                        <input {...register('role')} type='radio' value='SE' />
                         <RadioLabel>SE</RadioLabel>
                       </RadioWrapper>
                       <RadioWrapper>
-                        <input {...register('role')} type='radio' value='asd' />
+                        <input {...register('role')} type='radio' value='TM' />
                         <RadioLabel>TM</RadioLabel>
                       </RadioWrapper>
                     </RadioItemsWrapper>
@@ -152,7 +154,8 @@ function FormModal({ formModalOpen, setFormModalOpen }) {
                   <InputWrapper>
                     <select name='platoon' {...register('platoon')}>
                       <option value=''>select</option>
-                      <option value='1'>1</option>
+                      <option value='Spartans'>Spartans</option>
+                      <option value='BigBang'>BigBang</option>
                     </select>
                   </InputWrapper>
                 </Field>

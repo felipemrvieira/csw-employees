@@ -21,20 +21,22 @@ function EmployeesTable({ employees, selectedItem, setSelectedItem }) {
         <Table.Header>
           <Table.Row>
             <Table.HeaderCell>Name</Table.HeaderCell>
-            <Table.HeaderCell>Age</Table.HeaderCell>
-            <Table.HeaderCell>Gender</Table.HeaderCell>
+            <Table.HeaderCell>Start Date</Table.HeaderCell>
+            <Table.HeaderCell>Role</Table.HeaderCell>
+            <Table.HeaderCell>Platoon</Table.HeaderCell>
           </Table.Row>
         </Table.Header>
         <Table.Body>
-          {employees.map(({ age, gender, name, id }) => (
+          {employees.map(({ id, name, startDate, role, platoon }) => (
             <Table.Row
               active={id === selectedItem}
               key={id}
               onClick={() => handleClick(id)}
             >
               <Table.Cell>{name}</Table.Cell>
-              <Table.Cell>{age}</Table.Cell>
-              <Table.Cell>{gender}</Table.Cell>
+              <Table.Cell>{startDate.toLocaleDateString('en-US')}</Table.Cell>
+              <Table.Cell>{role}</Table.Cell>
+              <Table.Cell>{platoon}</Table.Cell>
             </Table.Row>
           ))}
         </Table.Body>

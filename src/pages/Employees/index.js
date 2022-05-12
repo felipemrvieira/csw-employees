@@ -11,10 +11,34 @@ function EmployeesPage() {
   const [formModalOpen, setFormModalOpen] = useState(false)
   const [confirmModalOpen, setConfirmModalOpen] = useState(false)
   const [employees, setEmployees] = useState([
-    { id: 1, name: 'John', age: 15, gender: 'Male' },
-    { id: 2, name: 'Amber', age: 40, gender: 'Female' },
-    { id: 3, name: 'Leslie', age: 25, gender: 'Other' },
-    { id: 4, name: 'Ben', age: 70, gender: 'Male' },
+    {
+      id: 1,
+      name: 'John',
+      startDate: new Date(),
+      role: 'SE',
+      platoon: 'Alchemists',
+    },
+    {
+      id: 2,
+      name: 'Felipe',
+      startDate: new Date(),
+      role: 'TM',
+      platoon: 'Spartans',
+    },
+    {
+      id: 3,
+      name: 'Maria',
+      startDate: new Date(),
+      role: 'JE',
+      platoon: 'BigBang',
+    },
+    {
+      id: 4,
+      name: 'Jack',
+      startDate: new Date(),
+      role: 'PE',
+      platoon: 'Spartans',
+    },
   ])
   const [selectedItem, setSelectedItem] = useState(null)
 
@@ -22,6 +46,10 @@ function EmployeesPage() {
     const newEmployees = employees.filter((item) => item.id !== selectedItem)
     setSelectedItem(null)
     setEmployees(newEmployees)
+  }
+
+  const addItem = (item) => {
+    setEmployees([...employees, item])
   }
 
   return (
@@ -40,6 +68,7 @@ function EmployeesPage() {
       <FormModal
         formModalOpen={formModalOpen}
         setFormModalOpen={setFormModalOpen}
+        addItem={addItem}
       />
       <ConfirmModal
         confirmModalOpen={confirmModalOpen}

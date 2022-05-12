@@ -6,9 +6,9 @@ import { Container } from './styles'
 
 function ActionButtons({
   setFormModalOpen,
-  deleteItem,
   setConfirmModalOpen,
   selectedItem,
+  setSelectedItem,
 }) {
   const handleDeleteClick = () => {
     if (!selectedItem) {
@@ -16,6 +16,18 @@ function ActionButtons({
     } else {
       setConfirmModalOpen(true)
     }
+  }
+  const handleEditClick = () => {
+    if (!selectedItem) {
+      toast.error('You need to select an item to edit!')
+    } else {
+      setFormModalOpen(true, selectedItem)
+    }
+  }
+
+  const handleAddClick = () => {
+    setFormModalOpen(true)
+    setSelectedItem(null)
   }
 
   return (
@@ -25,9 +37,14 @@ function ActionButtons({
           content='Add'
           icon='add'
           labelPosition='left'
-          onClick={() => setFormModalOpen(true)}
+          onClick={() => handleAddClick()}
         />
-        <Button content='Edit' icon='edit' labelPosition='left' />
+        <Button
+          content='Edit'
+          icon='edit'
+          labelPosition='left'
+          onClick={() => handleEditClick()}
+        />
         <Button
           content='Delete'
           icon='delete'

@@ -3,7 +3,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 // @ts-nocheck
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useForm, Controller } from 'react-hook-form'
 import DatePicker from 'react-datepicker'
 import { Button, Modal, Icon } from 'semantic-ui-react'
@@ -23,20 +23,28 @@ import {
 
 import 'react-datepicker/dist/react-datepicker.css'
 
-function FormModal({ formModalOpen, setFormModalOpen, addItem }) {
+function FormModal({
+  formModalOpen,
+  setFormModalOpen,
+  addItem,
+  selectedItem,
+  selectedEmployee,
+  setSelectedItem,
+}) {
   const {
     register,
     formState: { errors },
     handleSubmit,
     control,
     reset,
+    setValue,
   } = useForm()
 
   const onSubmit = (data) => {
-    console.log(data)
     addItem(data)
     reset()
     setFormModalOpen(false)
+    setSelectedItem(null)
   }
 
   const [startDate, setStartDate] = useState(new Date())
@@ -52,12 +60,22 @@ function FormModal({ formModalOpen, setFormModalOpen, addItem }) {
   const handleClose = () => {
     reset()
     setFormModalOpen(false)
+    setSelectedItem(null)
   }
+
+  useEffect(() => {
+    if (selectedItem) {
+      const fields = ['name', 'platoon', 'role', 'startDate']
+      fields.forEach((field) => setValue(field, selectedEmployee[field]))
+    }
+  }, [selectedItem])
 
   return (
     <Container>
       <Modal open={formModalOpen} size='tiny' onClose={() => handleClose()}>
-        <Modal.Header>Add Employee</Modal.Header>
+        <Modal.Header>
+          {selectedItem ? 'Edit Employee' : 'Add Employee'}
+        </Modal.Header>
         <Modal.Content>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div>
@@ -167,7 +185,7 @@ function FormModal({ formModalOpen, setFormModalOpen, addItem }) {
           <Button primary onClick={handleSubmit(onSubmit)}>
             Add
           </Button>
-          <Button onClick={() => setFormModalOpen(false)}>Cancel</Button>
+          <Button onClick={() => handleClose()}>Cancel</Button>
         </Modal.Actions>
       </Modal>
     </Container>

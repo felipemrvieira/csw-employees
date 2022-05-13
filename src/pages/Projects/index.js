@@ -3,6 +3,7 @@ import React, { useState, useEffect, useCallback } from 'react'
 import api from '../../services/api'
 import FormModal from '../../components/Projects/FormModal'
 import ConfirmModal from '../../components/Projects/ConfirmModal'
+import AllocationModal from '../../components/Projects/AllocationModal'
 import Table from '../../components/Projects/Table'
 import ActionButtons from '../../components/Projects/ActionButtons'
 import 'react-toastify/dist/ReactToastify.css'
@@ -10,6 +11,7 @@ import 'react-toastify/dist/ReactToastify.css'
 function ProjectsPage() {
   const [formModalOpen, setFormModalOpen] = useState(false)
   const [confirmModalOpen, setConfirmModalOpen] = useState(false)
+  const [allocationModalOpen, setAllocationModalOpen] = useState(false)
   const [projects, setProjects] = useState([])
   const [selectedItem, setSelectedItem] = useState(null)
 
@@ -37,15 +39,6 @@ function ProjectsPage() {
     setProjects([...projects, item])
   }
 
-  const editItem = (item) => {
-    const newProjects = projects.map((employee) =>
-      employee.id === item.id ? item : employee
-    )
-    setProjects(newProjects)
-  }
-
-  const getProject = () => projects.find((item) => item.id === selectedItem)
-
   return (
     <div>
       <ActionButtons
@@ -59,6 +52,7 @@ function ProjectsPage() {
         projects={projects}
         selectedItem={selectedItem}
         setSelectedItem={setSelectedItem}
+        setAllocationModalOpen={setAllocationModalOpen}
       />
       <FormModal
         formModalOpen={formModalOpen}
@@ -66,13 +60,19 @@ function ProjectsPage() {
         addItem={addItem}
         selectedItem={selectedItem}
         setSelectedItem={setSelectedItem}
-        // this should die after api is ready
         createProject={createProject}
       />
       <ConfirmModal
         confirmModalOpen={confirmModalOpen}
         setConfirmModalOpen={setConfirmModalOpen}
         deleteItem={deleteItem}
+      />
+      <AllocationModal
+        allocationModalOpen={allocationModalOpen}
+        setAllocationModalOpen={setAllocationModalOpen}
+        selectedItem={selectedItem}
+        setSelectedItem={setSelectedItem}
+        projects={projects}
       />
     </div>
   )

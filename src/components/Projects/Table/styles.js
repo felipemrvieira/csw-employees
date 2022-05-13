@@ -5,3 +5,9 @@ export const Container = styled.div`
   width: 100%;
   padding: 18px;
 `
+
+export const Blue = styled.div`
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
+`

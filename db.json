@@ -90,7 +90,8 @@
       "name": "Project Y",
       "employees": [
         { "id": 9, "name": "Rael Maciel", "allocation": "50%" },
-        { "id": 11, "name": "Thiago Maciel", "allocation": "50%" }
+        { "id": 11, "name": "Thiago Maciel", "allocation": "50%" },
+        { "id": 2, "name": "Felipe", "allocation": "50%" }
       ]
     }
   ]

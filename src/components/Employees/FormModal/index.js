@@ -7,6 +7,7 @@ import React, { useState, useEffect } from 'react'
 import { useForm, Controller } from 'react-hook-form'
 import DatePicker from 'react-datepicker'
 import { Button, Modal, Icon } from 'semantic-ui-react'
+import { toast } from 'react-toastify'
 
 import {
   Container,
@@ -27,9 +28,12 @@ function FormModal({
   formModalOpen,
   setFormModalOpen,
   addItem,
+  editItem,
   selectedItem,
   selectedEmployee,
   setSelectedItem,
+  createEmployee,
+  editEmployee,
 }) {
   const {
     register,
@@ -40,14 +44,22 @@ function FormModal({
     setValue,
   } = useForm()
 
-  const onSubmit = (data) => {
-    addItem(data)
+  const onSubmit = async (data) => {
+    if (!selectedItem) {
+      const employee = await createEmployee(data)
+      addItem(employee)
+    } else {
+      const employee = await editEmployee(data, selectedItem)
+      editItem(employee)
+    }
+    const message = selectedItem
+      ? 'Employee updated successfully!'
+      : 'Employee created successfully!'
+    toast.success(message)
     reset()
-    setFormModalOpen(false)
     setSelectedItem(null)
+    setFormModalOpen(false)
   }
-
-  const [startDate, setStartDate] = useState(new Date())
 
   const validateYear = (value) => {
     const year = value.getFullYear()
@@ -65,8 +77,9 @@ function FormModal({
 
   useEffect(() => {
     if (selectedItem) {
-      const fields = ['name', 'platoon', 'role', 'startDate']
+      const fields = ['name', 'platoon', 'role']
       fields.forEach((field) => setValue(field, selectedEmployee[field]))
+      setValue('startDate', new Date(selectedEmployee?.startDate))
     }
   }, [selectedItem])
 
@@ -88,7 +101,7 @@ function FormModal({
                     <input
                       {...register('name', {
                         required: true,
-                        maxLength: 20,
+                        maxLength: 35,
                       })}
                     />
 
@@ -141,7 +154,6 @@ function FormModal({
                           {...register('role')}
                           type='radio'
                           value='(none selected)'
-                          checked
                         />
                         <RadioLabel>(none selected)</RadioLabel>
                       </RadioWrapper>
@@ -183,7 +195,7 @@ function FormModal({
         </Modal.Content>
         <Modal.Actions>
           <Button primary onClick={handleSubmit(onSubmit)}>
-            Add
+            {selectedItem ? 'Edit' : 'Add'}
           </Button>
           <Button onClick={() => handleClose()}>Cancel</Button>
         </Modal.Actions>

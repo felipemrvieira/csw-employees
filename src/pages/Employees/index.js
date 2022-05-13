@@ -1,48 +1,36 @@
 // @ts-nocheck
-import React, { useState } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
+import api from '../../services/api'
 import FormModal from '../../components/Employees/FormModal'
 import ConfirmModal from '../../components/Employees/ConfirmModal'
 import Table from '../../components/Employees/Table'
 import ActionButtons from '../../components/Employees/ActionButtons'
-
 import 'react-toastify/dist/ReactToastify.css'
-
-const data = [
-  {
-    id: 1,
-    name: 'John',
-    startDate: new Date(),
-    role: 'SE',
-    platoon: 'Alchemists',
-  },
-  {
-    id: 2,
-    name: 'Felipe',
-    startDate: new Date(),
-    role: 'TM',
-    platoon: 'Spartans',
-  },
-  {
-    id: 3,
-    name: 'Maria',
-    startDate: new Date(),
-    role: 'JE',
-    platoon: 'BigBang',
-  },
-  {
-    id: 4,
-    name: 'Jack',
-    startDate: new Date(),
-    role: 'PE',
-    platoon: 'Spartans',
-  },
-]
 
 function EmployeesPage() {
   const [formModalOpen, setFormModalOpen] = useState(false)
   const [confirmModalOpen, setConfirmModalOpen] = useState(false)
-  const [employees, setEmployees] = useState(data)
+  const [employees, setEmployees] = useState([])
   const [selectedItem, setSelectedItem] = useState(null)
+
+  const loadEmployees = async () => {
+    const response = await api.get('/employees')
+    setEmployees(response.data)
+  }
+
+  const createEmployee = useCallback(async (employee) => {
+    const response = await api.post('/employees', employee)
+    return response.data
+  }, [])
+
+  const editEmployee = useCallback(async (employee, id) => {
+    const response = await api.put(`/employees/${id}`, employee)
+    return response.data
+  }, [])
+
+  useEffect(() => {
+    loadEmployees()
+  }, [])
 
   const deleteItem = () => {
     const newEmployees = employees.filter((item) => item.id !== selectedItem)
@@ -52,6 +40,13 @@ function EmployeesPage() {
 
   const addItem = (item) => {
     setEmployees([...employees, item])
+  }
+
+  const editItem = (item) => {
+    const newEmployees = employees.map((employee) =>
+      employee.id === item.id ? item : employee
+    )
+    setEmployees(newEmployees)
   }
 
   const getEmployee = () => employees.find((item) => item.id === selectedItem)
@@ -78,6 +73,9 @@ function EmployeesPage() {
         setSelectedItem={setSelectedItem}
         // this should die after api is ready
         selectedEmployee={getEmployee()}
+        createEmployee={createEmployee}
+        editEmployee={editEmployee}
+        editItem={editItem}
       />
       <ConfirmModal
         confirmModalOpen={confirmModalOpen}

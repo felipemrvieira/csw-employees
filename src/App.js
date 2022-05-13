@@ -6,8 +6,8 @@ import { Route, Routes, Link, BrowserRouter } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 import Employees from './pages/Employees'
 import Projects from './pages/Projects'
-import PageHeader from './components/Header'
-import Nav from './components/Nav'
+import PageHeader from './components/shared/Header'
+import Nav from './components/shared/Nav'
 
 function App() {
   return (

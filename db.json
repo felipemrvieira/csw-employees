@@ -1,0 +1,97 @@
+{
+  "employees": [
+    {
+      "id": 1,
+      "name": "John",
+      "startDate": "Thu May 12 2022",
+      "role": "SE",
+      "platoon": "Alchemists"
+    },
+    {
+      "id": 2,
+      "name": "Felipe",
+      "startDate": "Thu May 12 2022",
+      "role": "TM",
+      "platoon": "Spartans"
+    },
+    {
+      "name": "Maria",
+      "role": "(none selected)",
+      "platoon": "BigBang",
+      "id": 3
+    },
+    {
+      "id": 4,
+      "name": "Jack",
+      "startDate": "Thu May 12 2022",
+      "role": "PE",
+      "platoon": "Spartans"
+    },
+    {
+      "name": "Thiago",
+      "role": "(none selected)",
+      "platoon": "Spartans",
+      "id": 5
+    },
+    {
+      "name": "Yasmin Millena",
+      "role": "TM",
+      "platoon": "Spartans",
+      "startDate": "2022-05-12T23:00:00.000Z",
+      "id": 6
+    },
+    {
+      "name": "Acesso à vpn",
+      "role": "SE",
+      "platoon": "Spartans",
+      "startDate": "2022-05-11T23:00:00.000Z",
+      "id": 7
+    },
+    {
+      "name": "asd",
+      "role": "(none selected)",
+      "platoon": "",
+      "startDate": "2022-05-10T23:00:00.000Z",
+      "id": 8
+    },
+    {
+      "name": "Rael Maciel",
+      "role": "JE",
+      "platoon": "BigBang",
+      "startDate": "2022-05-11T23:00:00.000Z",
+      "id": 9
+    },
+    {
+      "name": "Acesso à vpn",
+      "role": "PE",
+      "platoon": "Spartans",
+      "startDate": "2022-05-12T23:00:00.000Z",
+      "id": 10
+    },
+    {
+      "name": "Thiago Maciel",
+      "role": "SE",
+      "platoon": "Spartans",
+      "startDate": "2022-05-04T23:00:00.000Z",
+      "id": 11
+    }
+  ],
+  "projects": [
+    {
+      "id": 1,
+      "name": "Project X",
+      "employees": [
+        { "id": 2, "name": "Felipe", "allocation": "50%" },
+        { "id": 3, "name": "Maria", "allocation": "50%" }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Project Y",
+      "employees": [
+        { "id": 9, "name": "Rael Maciel", "allocation": "50%" },
+        { "id": 11, "name": "Thiago Maciel", "allocation": "50%" }
+      ]
+    }
+  ]
+}

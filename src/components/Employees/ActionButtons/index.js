@@ -1,15 +1,18 @@
 /* eslint-disable react/prop-types */
-import React from 'react'
+import React, { useContext } from 'react'
 import { Button } from 'semantic-ui-react'
 import { toast } from 'react-toastify'
 import { Container } from './styles'
+import EmployeesContext from '../../../context/employees-context'
 
-function ActionButtons({
-  setFormModalOpen,
-  setConfirmModalOpen,
-  selectedItem,
-  setSelectedItem,
-}) {
+function ActionButtons() {
+  const {
+    setFormModalOpen,
+    setConfirmModalOpen,
+    selectedItem,
+    setSelectedItem,
+  } = useContext(EmployeesContext)
+
   const handleDeleteClick = () => {
     if (!selectedItem) {
       toast.error('You need to select an item to delete!')
@@ -21,13 +24,14 @@ function ActionButtons({
     if (!selectedItem) {
       toast.error('You need to select an item to edit!')
     } else {
-      setFormModalOpen(true, selectedItem)
+      setFormModalOpen(true)
     }
   }
 
   const handleAddClick = () => {
-    setFormModalOpen(true)
     setSelectedItem(null)
+
+    setFormModalOpen(true)
   }
 
   return (

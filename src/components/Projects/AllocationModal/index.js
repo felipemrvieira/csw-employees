@@ -8,7 +8,7 @@ import { useForm } from 'react-hook-form'
 import { Button, Modal, Icon, Table } from 'semantic-ui-react'
 import { toast } from 'react-toastify'
 import api from '../../../services/api'
-import ProjectsStore from '../../../store/projects-context'
+import ProjectsStore from '../../../context/projects-context'
 
 import { Container } from './styles'
 

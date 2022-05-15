@@ -8,7 +8,7 @@ import AllocationModal from '../../components/Projects/AllocationModal'
 import Table from '../../components/Projects/Table'
 import ActionButtons from '../../components/Projects/ActionButtons'
 import 'react-toastify/dist/ReactToastify.css'
-import ProjectsContext from '../../store/projects-context'
+import ProjectsContext from '../../context/projects-context'
 
 function ProjectsPage() {
   const [formModalOpen, setFormModalOpen] = useState(false)
@@ -53,14 +53,16 @@ function ProjectsPage() {
           formModalOpen,
           setFormModalOpen,
           addItem,
+          deleteItem,
           confirmModalOpen,
           setConfirmModalOpen,
+          createProject,
         }}
       >
-        <ActionButtons deleteItem={deleteItem} />
+        <ActionButtons />
         <Table />
-        <FormModal createProject={createProject} />
-        <ConfirmModal deleteItem={deleteItem} />
+        <FormModal />
+        <ConfirmModal />
         <AllocationModal />
       </ProjectsContext.Provider>
     </div>

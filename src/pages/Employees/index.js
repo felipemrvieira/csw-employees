@@ -1,10 +1,12 @@
 // @ts-nocheck
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useEffect, useCallback, useMemo } from 'react'
 import api from '../../services/api'
 import FormModal from '../../components/Employees/FormModal'
 import ConfirmModal from '../../components/Employees/ConfirmModal'
 import Table from '../../components/Employees/Table'
 import ActionButtons from '../../components/Employees/ActionButtons'
+import EmployeesContext from '../../context/employees-context'
+
 import 'react-toastify/dist/ReactToastify.css'
 
 function EmployeesPage() {
@@ -49,39 +51,45 @@ function EmployeesPage() {
     setEmployees(newEmployees)
   }
 
-  const getEmployee = () => employees.find((item) => item.id === selectedItem)
+  const value = useMemo(
+    () => ({
+      employees,
+      selectedItem,
+      setSelectedItem,
+      confirmModalOpen,
+      setConfirmModalOpen,
+      formModalOpen,
+      setFormModalOpen,
+      createEmployee,
+      editEmployee,
+      addItem,
+      editItem,
+      deleteItem,
+    }),
+    [
+      employees,
+      selectedItem,
+      setSelectedItem,
+      confirmModalOpen,
+      setConfirmModalOpen,
+      formModalOpen,
+      setFormModalOpen,
+      createEmployee,
+      editEmployee,
+      addItem,
+      editItem,
+      deleteItem,
+    ]
+  )
 
   return (
     <div>
-      <ActionButtons
-        setFormModalOpen={setFormModalOpen}
-        setConfirmModalOpen={setConfirmModalOpen}
-        deleteItem={deleteItem}
-        selectedItem={selectedItem}
-        setSelectedItem={setSelectedItem}
-      />
-      <Table
-        employees={employees}
-        selectedItem={selectedItem}
-        setSelectedItem={setSelectedItem}
-      />
-      <FormModal
-        formModalOpen={formModalOpen}
-        setFormModalOpen={setFormModalOpen}
-        addItem={addItem}
-        selectedItem={selectedItem}
-        setSelectedItem={setSelectedItem}
-        // this should die after api is ready
-        selectedEmployee={getEmployee()}
-        createEmployee={createEmployee}
-        editEmployee={editEmployee}
-        editItem={editItem}
-      />
-      <ConfirmModal
-        confirmModalOpen={confirmModalOpen}
-        setConfirmModalOpen={setConfirmModalOpen}
-        deleteItem={deleteItem}
-      />
+      <EmployeesContext.Provider value={value}>
+        <ActionButtons />
+        <Table />
+        <FormModal />
+        <ConfirmModal />
+      </EmployeesContext.Provider>
     </div>
   )
 }

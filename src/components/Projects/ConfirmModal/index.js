@@ -6,12 +6,13 @@
 import React, { useContext } from 'react'
 import { Button, Icon, Modal } from 'semantic-ui-react'
 import { toast } from 'react-toastify'
-import ProjectsStore from '../../../store/projects-context'
+import ProjectsStore from '../../../context/projects-context'
 
 import { Container } from './styles'
 
-function ConfirmModal({ deleteItem }) {
-  const { confirmModalOpen, setConfirmModalOpen } = useContext(ProjectsStore)
+function ConfirmModal() {
+  const { confirmModalOpen, setConfirmModalOpen, deleteItem } =
+    useContext(ProjectsStore)
 
   const onSubmit = () => {
     deleteItem()

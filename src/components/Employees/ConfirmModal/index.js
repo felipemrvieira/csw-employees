@@ -3,13 +3,17 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 // @ts-nocheck
 
-import React, { useState } from 'react'
+import React, { useContext } from 'react'
 import { Button, Icon, Modal } from 'semantic-ui-react'
 import { toast } from 'react-toastify'
+import EmployeesStore from '../../../context/employees-context'
 
 import { Container } from './styles'
 
-function ConfirmModal({ confirmModalOpen, setConfirmModalOpen, deleteItem }) {
+function ConfirmModal() {
+  const { confirmModalOpen, setConfirmModalOpen, deleteItem } =
+    useContext(EmployeesStore)
+
   const onSubmit = () => {
     deleteItem()
     setConfirmModalOpen(false)

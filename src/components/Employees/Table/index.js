@@ -1,12 +1,16 @@
 /* eslint-disable react/prop-types */
 // @ts-nocheck
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import _ from 'lodash'
 
 import { Table } from 'semantic-ui-react'
 import { Container } from './styles'
+import EmployeesStore from '../../../context/employees-context'
 
-function EmployeesTable({ employees, selectedItem, setSelectedItem }) {
+function EmployeesTable() {
+  const { employees, selectedItem, setSelectedItem, formModalOpen } =
+    useContext(EmployeesStore)
+
   const handleClick = (item) => {
     if (selectedItem === item) {
       setSelectedItem(null)

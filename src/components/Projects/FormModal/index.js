@@ -7,7 +7,7 @@ import React, { useState, useEffect, useContext } from 'react'
 import { useForm } from 'react-hook-form'
 import { Button, Modal, Icon } from 'semantic-ui-react'
 import { toast } from 'react-toastify'
-import ProjectsStore from '../../../store/projects-context'
+import ProjectsStore from '../../../context/projects-context'
 
 import {
   Container,
@@ -20,13 +20,14 @@ import {
 
 import 'react-datepicker/dist/react-datepicker.css'
 
-function FormModal({ createProject }) {
+function FormModal() {
   const {
     formModalOpen,
     setFormModalOpen,
     addItem,
     selectedItem,
     setSelectedItem,
+    createProject,
   } = useContext(ProjectsStore)
 
   const {

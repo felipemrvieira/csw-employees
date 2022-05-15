@@ -3,7 +3,7 @@ import React, { useContext } from 'react'
 import { Button } from 'semantic-ui-react'
 import { toast } from 'react-toastify'
 import { Container } from './styles'
-import ProjectsStore from '../../../store/projects-context'
+import ProjectsStore from '../../../context/projects-context'
 
 function ActionButtons() {
   const {

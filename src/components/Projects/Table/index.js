@@ -5,7 +5,7 @@ import _ from 'lodash'
 
 import { Table } from 'semantic-ui-react'
 import { Container, Blue } from './styles'
-import ProjectsStore from '../../../store/projects-context'
+import ProjectsStore from '../../../context/projects-context'
 
 function ProjectsTable() {
   const { projects, selectedItem, setSelectedItem, setAllocationModalOpen } =

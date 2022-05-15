@@ -3,11 +3,12 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 // @ts-nocheck
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { useForm, Controller } from 'react-hook-form'
 import DatePicker from 'react-datepicker'
 import { Button, Modal, Icon } from 'semantic-ui-react'
 import { toast } from 'react-toastify'
+import EmployeesContext from '../../../context/employees-context'
 
 import {
   Container,
@@ -24,17 +25,18 @@ import {
 
 import 'react-datepicker/dist/react-datepicker.css'
 
-function FormModal({
-  formModalOpen,
-  setFormModalOpen,
-  addItem,
-  editItem,
-  selectedItem,
-  selectedEmployee,
-  setSelectedItem,
-  createEmployee,
-  editEmployee,
-}) {
+function FormModal() {
+  const {
+    employees,
+    formModalOpen,
+    setFormModalOpen,
+    addItem,
+    editItem,
+    selectedItem,
+    setSelectedItem,
+    createEmployee,
+    editEmployee,
+  } = useContext(EmployeesContext)
   const {
     register,
     formState: { errors },
@@ -77,9 +79,19 @@ function FormModal({
 
   useEffect(() => {
     if (selectedItem) {
-      const fields = ['name', 'platoon', 'role']
-      fields.forEach((field) => setValue(field, selectedEmployee[field]))
+      const selectedEmployee = employees.find(
+        (item) => item.id === selectedItem
+      )
+
+      // const fields = ['platoon', 'role']
+      // fields.forEach((field) => setValue(field, selectedEmployee[field]))
+      setValue('name', selectedEmployee?.name)
+      setValue('role', selectedEmployee?.role)
+      setValue('platoon', selectedEmployee?.platoon)
       setValue('startDate', new Date(selectedEmployee?.startDate))
+      // setValue('startDate', selectedEmployee?.startDate)
+    } else {
+      reset()
     }
   }, [selectedItem])
 

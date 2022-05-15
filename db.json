@@ -81,18 +81,50 @@
       "id": 1,
       "name": "Project X",
       "employees": [
-        { "id": 2, "name": "Felipe", "allocation": "50%" },
-        { "id": 3, "name": "Maria", "allocation": "50%" }
+        {
+          "id": 2,
+          "name": "Felipe",
+          "allocation": "50%"
+        },
+        {
+          "id": 3,
+          "name": "Maria",
+          "allocation": "50%"
+        }
       ]
     },
     {
       "id": 2,
       "name": "Project Y",
       "employees": [
-        { "id": 9, "name": "Rael Maciel", "allocation": "50%" },
-        { "id": 11, "name": "Thiago Maciel", "allocation": "50%" },
-        { "id": 2, "name": "Felipe", "allocation": "50%" }
+        {
+          "id": 9,
+          "name": "Rael Maciel",
+          "allocation": "50%"
+        },
+        {
+          "id": 11,
+          "name": "Thiago Maciel",
+          "allocation": "50%"
+        },
+        {
+          "id": 2,
+          "name": "Felipe",
+          "allocation": "50%"
+        }
       ]
+    },
+    {
+      "name": "teste",
+      "id": 3
+    },
+    {
+      "name": "asd",
+      "id": 4
+    },
+    {
+      "name": "asd",
+      "id": 5
     }
   ]
 }

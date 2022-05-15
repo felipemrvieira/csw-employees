@@ -3,10 +3,11 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 // @ts-nocheck
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { useForm } from 'react-hook-form'
 import { Button, Modal, Icon } from 'semantic-ui-react'
 import { toast } from 'react-toastify'
+import ProjectsStore from '../../../store/projects-context'
 
 import {
   Container,
@@ -19,14 +20,15 @@ import {
 
 import 'react-datepicker/dist/react-datepicker.css'
 
-function FormModal({
-  formModalOpen,
-  setFormModalOpen,
-  addItem,
-  selectedItem,
-  setSelectedItem,
-  createProject,
-}) {
+function FormModal({ createProject }) {
+  const {
+    formModalOpen,
+    setFormModalOpen,
+    addItem,
+    selectedItem,
+    setSelectedItem,
+  } = useContext(ProjectsStore)
+
   const {
     register,
     formState: { errors },

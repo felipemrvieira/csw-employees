@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-constructed-context-values */
 // @ts-nocheck
 import React, { useState, useEffect, useCallback } from 'react'
 import api from '../../services/api'
@@ -7,6 +8,7 @@ import AllocationModal from '../../components/Projects/AllocationModal'
 import Table from '../../components/Projects/Table'
 import ActionButtons from '../../components/Projects/ActionButtons'
 import 'react-toastify/dist/ReactToastify.css'
+import ProjectsContext from '../../store/projects-context'
 
 function ProjectsPage() {
   const [formModalOpen, setFormModalOpen] = useState(false)
@@ -41,39 +43,26 @@ function ProjectsPage() {
 
   return (
     <div>
-      <ActionButtons
-        setFormModalOpen={setFormModalOpen}
-        setConfirmModalOpen={setConfirmModalOpen}
-        deleteItem={deleteItem}
-        selectedItem={selectedItem}
-        setSelectedItem={setSelectedItem}
-      />
-      <Table
-        projects={projects}
-        selectedItem={selectedItem}
-        setSelectedItem={setSelectedItem}
-        setAllocationModalOpen={setAllocationModalOpen}
-      />
-      <FormModal
-        formModalOpen={formModalOpen}
-        setFormModalOpen={setFormModalOpen}
-        addItem={addItem}
-        selectedItem={selectedItem}
-        setSelectedItem={setSelectedItem}
-        createProject={createProject}
-      />
-      <ConfirmModal
-        confirmModalOpen={confirmModalOpen}
-        setConfirmModalOpen={setConfirmModalOpen}
-        deleteItem={deleteItem}
-      />
-      <AllocationModal
-        allocationModalOpen={allocationModalOpen}
-        setAllocationModalOpen={setAllocationModalOpen}
-        selectedItem={selectedItem}
-        setSelectedItem={setSelectedItem}
-        projects={projects}
-      />
+      <ProjectsContext.Provider
+        value={{
+          projects,
+          selectedItem,
+          setSelectedItem,
+          allocationModalOpen,
+          setAllocationModalOpen,
+          formModalOpen,
+          setFormModalOpen,
+          addItem,
+          confirmModalOpen,
+          setConfirmModalOpen,
+        }}
+      >
+        <ActionButtons deleteItem={deleteItem} />
+        <Table />
+        <FormModal createProject={createProject} />
+        <ConfirmModal deleteItem={deleteItem} />
+        <AllocationModal />
+      </ProjectsContext.Provider>
     </div>
   )
 }

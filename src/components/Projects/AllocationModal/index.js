@@ -3,32 +3,27 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 // @ts-nocheck
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { useForm } from 'react-hook-form'
 import { Button, Modal, Icon, Table } from 'semantic-ui-react'
 import { toast } from 'react-toastify'
 import api from '../../../services/api'
+import ProjectsStore from '../../../store/projects-context'
 
-import {
-  Container,
-  Label,
-  LabelWrapper,
-  InputWrapper,
-  Field,
-  ErrorMessage,
-} from './styles'
+import { Container } from './styles'
 
 import 'react-datepicker/dist/react-datepicker.css'
 
-function AllocationModal({
-  allocationModalOpen,
-  setAllocationModalOpen,
-  addItem,
-  selectedItem,
-  setSelectedItem,
-  createProject,
-  projects,
-}) {
+function AllocationModal() {
+  const {
+    allocationModalOpen,
+    setAllocationModalOpen,
+    addItem,
+    selectedItem,
+    setSelectedItem,
+    createProject,
+  } = useContext(ProjectsStore)
+
   const [project, setProject] = useState({})
 
   const {

@@ -1,15 +1,18 @@
 /* eslint-disable react/prop-types */
-import React from 'react'
+import React, { useContext } from 'react'
 import { Button } from 'semantic-ui-react'
 import { toast } from 'react-toastify'
 import { Container } from './styles'
+import ProjectsStore from '../../../store/projects-context'
 
-function ActionButtons({
-  setFormModalOpen,
-  setConfirmModalOpen,
-  selectedItem,
-  setSelectedItem,
-}) {
+function ActionButtons() {
+  const {
+    setFormModalOpen,
+    setConfirmModalOpen,
+    selectedItem,
+    setSelectedItem,
+  } = useContext(ProjectsStore)
+
   const handleDeleteClick = () => {
     if (!selectedItem) {
       toast.error('You need to select an item to delete!')

@@ -3,13 +3,16 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 // @ts-nocheck
 
-import React, { useState } from 'react'
+import React, { useContext } from 'react'
 import { Button, Icon, Modal } from 'semantic-ui-react'
 import { toast } from 'react-toastify'
+import ProjectsStore from '../../../store/projects-context'
 
 import { Container } from './styles'
 
-function ConfirmModal({ confirmModalOpen, setConfirmModalOpen, deleteItem }) {
+function ConfirmModal({ deleteItem }) {
+  const { confirmModalOpen, setConfirmModalOpen } = useContext(ProjectsStore)
+
   const onSubmit = () => {
     deleteItem()
     setConfirmModalOpen(false)

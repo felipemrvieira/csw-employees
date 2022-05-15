@@ -1,17 +1,16 @@
 /* eslint-disable react/prop-types */
 // @ts-nocheck
-import React, { useState } from 'react'
+import React, { useContext } from 'react'
 import _ from 'lodash'
 
 import { Table } from 'semantic-ui-react'
 import { Container, Blue } from './styles'
+import ProjectsStore from '../../../store/projects-context'
 
-function ProjectsTable({
-  projects,
-  selectedItem,
-  setSelectedItem,
-  setAllocationModalOpen,
-}) {
+function ProjectsTable() {
+  const { projects, selectedItem, setSelectedItem, setAllocationModalOpen } =
+    useContext(ProjectsStore)
+
   const handleClick = (item) => {
     if (selectedItem === item) {
       setSelectedItem(null)

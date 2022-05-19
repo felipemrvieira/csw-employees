@@ -30,6 +30,7 @@ function ActionButtons() {
     <Container>
       <div>
         <Button
+          className='add-button'
           content='Add'
           icon='add'
           labelPosition='left'

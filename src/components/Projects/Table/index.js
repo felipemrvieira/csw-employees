@@ -21,30 +21,34 @@ function ProjectsTable() {
 
   return (
     <Container>
-      <Table celled fixed selectable>
-        <Table.Header>
-          <Table.Row>
-            <Table.HeaderCell>Name</Table.HeaderCell>
-            <Table.HeaderCell />
-          </Table.Row>
-        </Table.Header>
-        <Table.Body>
-          {projects.map(({ id, name }) => (
-            <Table.Row
-              active={id === selectedItem}
-              key={id}
-              onClick={() => handleClick(id)}
-            >
-              <Table.Cell>{name}</Table.Cell>
-              <Table.Cell>
-                <Blue onClick={() => setAllocationModalOpen(true)}>
-                  Employees
-                </Blue>
-              </Table.Cell>
+      {projects ? (
+        <Table celled fixed selectable>
+          <Table.Header>
+            <Table.Row>
+              <Table.HeaderCell>Name</Table.HeaderCell>
+              <Table.HeaderCell />
             </Table.Row>
-          ))}
-        </Table.Body>
-      </Table>{' '}
+          </Table.Header>
+          <Table.Body>
+            {projects.map(({ id, name }) => (
+              <Table.Row
+                active={id === selectedItem}
+                key={id}
+                onClick={() => handleClick(id)}
+              >
+                <Table.Cell>{name}</Table.Cell>
+                <Table.Cell>
+                  <Blue onClick={() => setAllocationModalOpen(true)}>
+                    Employees
+                  </Blue>
+                </Table.Cell>
+              </Table.Row>
+            ))}
+          </Table.Body>
+        </Table>
+      ) : (
+        <h1>No data to show</h1>
+      )}
     </Container>
   )
 }

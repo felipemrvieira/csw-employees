@@ -31,9 +31,7 @@ describe('Projects page', () => {
     const DeleteButton = screen.getByText('Delete', { exact: false })
     userEvent.click(DeleteButton)
 
-    expect(
-      await screen.findByText('You need to select an item to delete!')
-    ).toBeInTheDocument()
+    expect(await screen.findByText('Price Search')).toBeInTheDocument()
   })
 
   test('fetch and render projects itens', async () => {
